@@ -1,12 +1,12 @@
-   target/
-   HELP.md
-   .mvn/wrapper/maven-wrapper.jar
+target/
+HELP.md
+.mvn/wrapper/maven-wrapper.jar
 
-   ### IntelliJ IDEA ###
-   .idea/
-   *.iml
-   *.iws
-   *.ipr
+### IntelliJ IDEA ###
+.idea/
+*.iml
+*.iws
+*.ipr
 
-   ### VS Code ###
-   .vscode/
+### VS Code ###
+.vscode/
