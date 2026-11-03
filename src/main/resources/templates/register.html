@@ -1,18 +1,42 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Registration</title>
+    <title>Védett fajok – Regisztráció</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
 </head>
-<body>
-    <div th:replace="~{menu :: menu}"></div>
-    <hr>
-    <h1>Registration</h1>
-    <p th:if="${error}" th:text="${error}" style="color: red"></p>
-    <form th:action="@{/register}" method="post">
-        <label>Username:</label><input type="text" name="username" required><br>
-        <label>Password:</label><input type="password" name="password" required><br>
-        <button type="submit">Register</button>
-    </form>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>Regisztráció</h1></header>
+
+                <p th:if="${error}" th:text="${error}" style="color:#ff7496;"></p>
+
+                <form th:action="@{/register}" method="post">
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="username">Felhasználónév</label>
+                            <input type="text" name="username" id="username" required />
+                        </div>
+                        <div class="field half">
+                            <label for="password">Jelszó</label>
+                            <input type="password" name="password" id="password" required />
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Regisztráció" class="primary" /></li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
 </html>
