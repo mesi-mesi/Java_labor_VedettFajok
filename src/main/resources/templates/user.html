@@ -1,14 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>User</title>
+    <title>Védett fajok – Felhasználói oldal</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
 </head>
-<body>
-    <div th:replace="~{menu :: menu}"></div>
-    <hr>
-    <h1>User page</h1>
-    <p>This page can be seen by logged in users.</p>
-    <p>Logged in:<strong sec:authentication="name"></strong></p>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>Felhasználói oldal</h1></header>
+                <p>Üdv, <strong sec:authentication="name"></strong>! Ezt az oldalt csak bejelentkezett felhasználók látják.</p>
+                <ul class="actions">
+                    <li><a th:href="@{/}" class="button primary">Tovább a Főoldalra</a></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
 </html>

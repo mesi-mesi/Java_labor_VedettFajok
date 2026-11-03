@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+    <title>Védett fajok – Főoldal</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
 </head>
-<body>
-    <div th:replace="~{menu :: menu}"></div>
-    <hr>
-    <h1>Home page</h1>
-    <div sec:authorize="isAuthenticated()">
-        <p>Logged in user:<strong sec:authentication="name"></strong></p>
+<body class="is-preload">
+<div id="wrapper">
+
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major">
+                    <h1>Védett fajok</h1>
+                </header>
+                <p>Magyarország fokozottan védett állatfajai.</p>
+                <p sec:authorize="isAuthenticated()">
+                    Bejelentkezve: <strong sec:authentication="name"></strong>
+                </p>
+            </div>
+        </section>
     </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
 </html>

@@ -26,7 +26,7 @@ public class Controller2 {
     @PostMapping("/register")
     public String register(@RequestParam String username, @RequestParam String password, Model model) {
         if (userRepository.findByUsername(username).isPresent()) {
-            model.addAttribute("error","This username is already taken!");
+            model.addAttribute("error","Ez a felhasználónév már foglalt!");
             return "register";
         }
         User user = new User();

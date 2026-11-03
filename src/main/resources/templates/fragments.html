@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<!-- 1. HEAD: meta és CSS -->
+<th:block th:fragment="head">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+    <noscript><link rel="stylesheet" th:href="@{/assets/css/noscript.css}" /></noscript>
+</th:block>
+
+<!-- 2. FEJLÉC + MENÜ -->
+<th:block th:fragment="header">
+    <header id="header">
+        <a th:href="@{/}" class="logo"><strong>Védett fajok</strong> <span>Magyarország fokozottan védett állatai</span></a>
+        <nav>
+            <a href="#menu">Menü</a>
+        </nav>
+    </header>
+
+    <nav id="menu">
+        <ul class="links">
+            <li><a th:href="@{/}">Főoldal</a></li>
+            <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
+            <li><a th:href="@{/diagram}">Diagram</a></li>
+            <li><a th:href="@{/rest}">REST</a></li>
+            <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenetek}">Üzenetek</a></li>
+            <li sec:authorize="hasRole('ADMIN')"><a th:href="@{/crud}">CRUD</a></li>
+        </ul>
+
+        <ul class="actions stacked" sec:authorize="isAnonymous()">
+            <li><a th:href="@{/login}" class="button primary fit">Bejelentkezés</a></li>
+            <li><a th:href="@{/register}" class="button fit">Regisztráció</a></li>
+        </ul>
+
+        <ul class="actions stacked" sec:authorize="isAuthenticated()">
+            <li>Bejelentkezve: <strong sec:authentication="name"></strong></li>
+            <li>
+                <form th:action="@{/logout}" method="post">
+                    <button type="submit" class="button fit">Kijelentkezés</button>
+                </form>
+            </li>
+        </ul>
+    </nav>
+</th:block>
+
+<!-- 3. LÁBLÉC -->
+<footer id="footer" th:fragment="footer">
+    <div class="inner">
+        <ul class="copyright">
+            <li>Készítették: Molnár Emese (CN642U), ANNA_NEVE (ANNA_NEPTUN)</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</footer>
+
+<!-- 4. SCRIPTEK -->
+<th:block th:fragment="scripts">
+    <script th:src="@{/assets/js/jquery.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
+    <script th:src="@{/assets/js/browser.min.js}"></script>
+    <script th:src="@{/assets/js/breakpoints.min.js}"></script>
+    <script th:src="@{/assets/js/util.js}"></script>
+    <script th:src="@{/assets/js/main.js}"></script>
+</th:block>
+
+</html>
