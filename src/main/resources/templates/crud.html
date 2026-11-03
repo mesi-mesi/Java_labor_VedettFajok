@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Védett fajok – CRUD</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>CRUD</h1></header>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Név</th>
+                            <th>Kategória</th>
+                            <th>Eszmei érték (Ft)</th>
+                            <th>Év</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="allat : ${allatok}">
+                            <td th:text="${allat.id}"></td>
+                            <td th:text="${allat.nev}"></td>
+                            <td th:text="${allat.kategoria.nev}"></td>
+                            <td th:text="${#numbers.formatInteger(allat.ertek.forint, 0, 'WHITESPACE')}"></td>
+                            <td th:text="${allat.ev != null ? allat.ev : '–'}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>

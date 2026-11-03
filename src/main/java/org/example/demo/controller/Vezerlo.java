@@ -19,4 +19,10 @@ public class Vezerlo {
         model.addAttribute("sorok", kategoriaRepo.fajokKategoriankent());
         return "diagram";
     }
+    // CRUD – Read: a fajok listája
+    @GetMapping("/crud")
+    public String crud(Model model) {
+        model.addAttribute("allatok", allatRepo.findAllByOrderByNev());
+        return "crud";
+    }
 }
