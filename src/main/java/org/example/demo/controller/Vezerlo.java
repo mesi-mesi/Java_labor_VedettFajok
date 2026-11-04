@@ -25,6 +25,11 @@ public class Vezerlo {
         model.addAttribute("sorok", kategoriaRepo.fajokKategoriankent());
         return "diagram";
     }
+    // REST menü: a RESTful API leírása
+    @GetMapping("/rest")
+    public String rest() {
+        return "rest";
+    }
     // CRUD – Read: a fajok listája
     @GetMapping("/crud")
     public String crud(Model model) {
