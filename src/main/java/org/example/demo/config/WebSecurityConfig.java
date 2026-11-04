@@ -45,7 +45,7 @@ public class WebSecurityConfig {
                 .authenticationProvider(authenticationProvider())
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/assets/**", "/images/**", "/adatbazis", "/diagram", "/rest", "/api/**").permitAll()
+                        .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/assets/**", "/images/**", "/adatbazis", "/diagram", "/rest", "/api/**", "/error").permitAll()
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/crud/**").hasRole("ADMIN")
