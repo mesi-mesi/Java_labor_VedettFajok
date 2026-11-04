@@ -59,4 +59,10 @@ public class Vezerlo {
         allatRepo.save(allat);
         return "redirect:/crud";
     }
+    // CRUD – Delete: az adott ID-jű faj törlése
+    @GetMapping("/crud/delete/{id}")
+    public String torolAllat(@PathVariable(name = "id") int id) {
+        allatRepo.delete(allatRepo.findById(id).get());
+        return "redirect:/crud";
+    }
 }
