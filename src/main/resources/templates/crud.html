@@ -25,6 +25,7 @@
                             <th>Kategória</th>
                             <th>Eszmei érték (Ft)</th>
                             <th>Év</th>
+                            <th>Művelet</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,7 @@
                             <td th:text="${allat.kategoria.nev}"></td>
                             <td th:text="${#numbers.formatInteger(allat.ertek.forint, 0, 'WHITESPACE')}"></td>
                             <td th:text="${allat.ev != null ? allat.ev : '–'}"></td>
+                            <td><a th:href="@{'/crud/edit/'+${allat.id}}">Módosítás</a></td>
                         </tr>
                         </tbody>
                     </table>

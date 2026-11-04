@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Védett fajok – Faj módosítása</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>Faj módosítása</h1></header>
+                <form th:action="@{/crud/modosit}" th:object="${allat}" method="post">
+                    <input type="hidden" th:field="*{id}" />
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="nev">Név</label>
+                            <input type="text" th:field="*{nev}" maxlength="100" required />
+                        </div>
+                        <div class="field half">
+                            <label for="ev">Év (nem kötelező)</label>
+                            <input type="text" th:field="*{ev}" inputmode="numeric" pattern="[0-9]*" />
+                        </div>
+                        <div class="field half">
+                            <label for="katid">Kategória</label>
+                            <select th:field="*{katid}">
+                                <option th:each="kategoria : ${kategoriak}"
+                                        th:value="${kategoria.id}"
+                                        th:text="${kategoria.nev}"></option>
+                            </select>
+                        </div>
+                        <div class="field half">
+                            <label for="ertekid">Eszmei érték (Ft)</label>
+                            <select th:field="*{ertekid}">
+                                <option th:each="ertek : ${ertekek}"
+                                        th:value="${ertek.id}"
+                                        th:text="${#numbers.formatInteger(ertek.forint, 0, 'WHITESPACE')}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Módosít" class="primary" /></li>
+                        <li><a th:href="@{/crud}" class="button">Mégse</a></li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>
