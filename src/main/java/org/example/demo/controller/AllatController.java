@@ -1,6 +1,7 @@
 package org.example.demo.controller;
 import org.example.demo.entity.Allat;
 import org.example.demo.repository.AllatRepo;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,10 @@ class AllatController {
                     return repo.save(a);
                 })
                 .orElseThrow(() -> new AllatNotFoundException(id));
+    }
+    // REST – az adott ID-jű faj törlése
+    @DeleteMapping("/api/allatok/{id}")
+    void torolAllat(@PathVariable int id) {
+        repo.deleteById(id);
     }
 }
