@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Védett fajok – REST</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>REST</h1></header>
+                <p>Az alkalmazás RESTful API-n keresztül is eléri a védett fajok adatait. A válaszok JSON formátumúak.</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Kérés</th>
+                            <th>Útvonal</th>
+                            <th>Művelet</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td><a th:href="@{/api/allatok}" th:text="@{/api/allatok}"></a></td>
+                            <td>az összes faj lekérdezése</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td th:text="@{/api/allatok} + '/{id}'"></td>
+                            <td>egy faj lekérdezése</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td th:text="@{/api/allatok}"></td>
+                            <td>új faj felvétele</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td th:text="@{/api/allatok} + '/{id}'"></td>
+                            <td>egy faj módosítása</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td th:text="@{/api/allatok} + '/{id}'"></td>
+                            <td>egy faj törlése</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3>A POST és a PUT kérés törzse</h3>
+                <pre><code>{"nev": "Próba faj", "ev": 2024, "katid": 1, "ertekid": 1}</code></pre>
+                <p>Az év elhagyható. A <code>katid</code> a kategória, az <code>ertekid</code> az eszmei érték azonosítója.</p>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>

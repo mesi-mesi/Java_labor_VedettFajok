@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Védett fajok – Diagram</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>Diagram</h1></header>
+                <p>A fokozottan védett fajok száma kategóriánként.</p>
+                <div style="position: relative; height: 26em; margin-bottom: 2em;">
+                    <canvas id="diagram" role="img" aria-label="Fajok száma kategóriánként, a pontos értékek az alábbi táblázatban"></canvas>
+                </div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th>Kategória</th>
+                            <th>Fajok száma</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sor : ${sorok}">
+                            <td th:text="${sor[0]}"></td>
+                            <td th:text="${sor[1]}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.9/dist/chart.umd.min.js"></script>
+<script th:inline="javascript">
+    const sorok = /*[[${sorok}]]*/ [];
+
+    new Chart(document.getElementById("diagram"), {
+        type: "bar",
+        data: {
+            labels: sorok.map(sor => sor[0]),
+            datasets: [{
+                label: "Fajok száma",
+                data: sorok.map(sor => sor[1]),
+                backgroundColor: "#9bf1ff",
+                borderRadius: 4
+            }]
+        },
+        options: {
+            indexAxis: "y",
+            maintainAspectRatio: false,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { beginAtZero: true, ticks: { color: "#ffffff" }, grid: { color: "rgba(255, 255, 255, 0.15)" } },
+                y: { ticks: { color: "#ffffff" }, grid: { display: false } }
+            }
+        }
+    });
+</script>
+</body>
+</html>
