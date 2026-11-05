@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Védett fajok – Kapcsolat</title>
+    <th:block th:replace="~{fragments :: head}"></th:block>
+</head>
+<body class="is-preload">
+<div id="wrapper">
+    <th:block th:replace="~{fragments :: header}"></th:block>
+
+    <div id="main" class="alt">
+        <section id="one">
+            <div class="inner">
+                <header class="major"><h1>Kapcsolat</h1></header>
+                <p>Kérdésed vagy észrevételed van a védett fajokkal kapcsolatban? Írj nekünk!</p>
+
+                <p th:if="${siker}" th:text="${siker}" style="color:#9bf1ff;"></p>
+
+                <form th:action="@{/kapcsolat}" th:object="${uzenet}" method="post">
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="nev">Név</label>
+                            <input type="text" id="nev" th:field="*{nev}" />
+                            <span th:if="${#fields.hasErrors('nev')}" th:errors="*{nev}" style="color:#ff7496;"></span>
+                        </div>
+                        <div class="field half">
+                            <label for="email">E-mail</label>
+                            <input type="text" id="email" th:field="*{email}" />
+                            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:#ff7496;"></span>
+                        </div>
+                        <div class="field">
+                            <label for="szoveg">Üzenet</label>
+                            <textarea id="szoveg" rows="6" th:field="*{szoveg}"></textarea>
+                            <span th:if="${#fields.hasErrors('szoveg')}" th:errors="*{szoveg}" style="color:#ff7496;"></span>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Küldés" class="primary" /></li>
+                        <li><input type="reset" value="Törlés" /></li>
+                    </ul>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <th:block th:replace="~{fragments :: footer}"></th:block>
+</div>
+<th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>
