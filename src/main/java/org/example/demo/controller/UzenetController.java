@@ -41,4 +41,10 @@ public class UzenetController {
         redirectAttributes.addFlashAttribute("siker", "Köszönjük, az üzenetedet elmentettük!");
         return "redirect:/kapcsolat";
     }
+    // Üzenetek listája: legfrissebb elöl, csak bejelentkezett felhasználónak
+    @GetMapping("/uzenetek")
+    public String uzenetek(Model model) {
+        model.addAttribute("uzenetek", uzenetRepo.findAllByOrderByKuldesIdejeDesc());
+        return "uzenetek";
+    }
 }

@@ -49,6 +49,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/user").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .requestMatchers("/crud/**").hasRole("ADMIN")
+                        .requestMatchers("/uzenetek").hasAnyRole("USER", "ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
