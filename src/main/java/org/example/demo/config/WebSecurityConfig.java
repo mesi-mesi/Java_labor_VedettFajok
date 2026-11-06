@@ -31,17 +31,19 @@ public class WebSecurityConfig {
                     .getAuthorities()
                     .stream()
                     .anyMatch(authority -> authority.getAuthority().equals("ROLE_ADMIN"));
+            // getContextPath(): helyben "", a szerveren "/cn642u"
+            String ctx = request.getContextPath();
             if (isAdmin) {
-                response.sendRedirect("/admin");
+                response.sendRedirect(ctx + "/admin");
             } else {
-                response.sendRedirect("/user");
+                response.sendRedirect(ctx + "/user");
             }
         };
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http)
             throws Exception {
-                http
+        http
                 .authenticationProvider(authenticationProvider())
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/api/**"))
                 .authorizeHttpRequests(auth -> auth
@@ -65,14 +67,17 @@ public class WebSecurityConfig {
                 .exceptionHandling(exception -> exception
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/login"), request -> request.getRequestURI().equals("/user")
+                                        response.sendRedirect(request.getContextPath() + "/login"),
+                                request -> request.getServletPath().equals("/user")
                         )
                         .defaultAuthenticationEntryPointFor(
                                 (request, response, authException) ->
-                                        response.sendRedirect("/"),request -> request.getRequestURI().equals("/admin")
+                                        response.sendRedirect(request.getContextPath() + "/"),
+                                request -> request.getServletPath().equals("/admin")
                         )
                         .accessDeniedHandler(
-                                (request, response, accessDeniedException) -> response.sendRedirect("/")
+                                (request, response, accessDeniedException) ->
+                                        response.sendRedirect(request.getContextPath() + "/")
                         )
                 );
         return http.build();
