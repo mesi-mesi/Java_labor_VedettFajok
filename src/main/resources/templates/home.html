@@ -7,25 +7,60 @@
 </head>
 <body class="is-preload">
 <div id="wrapper">
-
     <th:block th:replace="~{fragments :: header}"></th:block>
 
-    <div id="main" class="alt">
-        <section id="one">
+    <!-- Banner -->
+    <section id="banner" class="major">
+        <div class="inner">
+            <header class="major">
+                <h1>Védett fajok</h1>
+            </header>
+            <div class="content">
+                <p>Magyarország fokozottan védett állatai<br />
+                    <span th:text="${fajokSzama}"></span> faj,
+                    <span th:text="${#lists.size(kategoriak)}"></span> kategóriában</p>
+                <ul class="actions">
+                    <li><a href="#one" class="button next scrolly">Kategóriák</a></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <div id="main">
+
+        <!-- Kategóriák csempékként, az adatbázisból -->
+        <section id="one" class="tiles">
+            <article th:each="k : ${kategoriak}">
+                <span class="image">
+                    <img th:src="@{'/images/kategoriak/kat' + ${k[0]} + '.jpg'}" th:alt="${k[1]}" />
+                </span>
+                <header class="major">
+                    <h3><a th:href="@{/adatbazis}" class="link" th:text="${k[1]}"></a></h3>
+                    <p th:text="${k[2]} + ' védett faj'"></p>
+                </header>
+            </article>
+        </section>
+
+        <!-- Rövid bemutatás -->
+        <section id="two">
             <div class="inner">
                 <header class="major">
-                    <h1>Védett fajok</h1>
+                    <h2>Az oldalról</h2>
                 </header>
-                <p>Magyarország fokozottan védett állatfajai.</p>
-                <p sec:authorize="isAuthenticated()">
-                    Bejelentkezve: <strong sec:authentication="name"></strong>
-                </p>
+                <p>Az oldal a Magyarországon fokozottan védett állatfajokat mutatja be: a fajok rendszertani
+                    kategóriáját, eszmei értékét és a védetté nyilvánítás évét. Az adatokat táblázatban és
+                    diagramon is megtekintheted.</p>
+                <p sec:authorize="isAuthenticated()">Bejelentkezve: <strong sec:authentication="name"></strong></p>
+                <ul class="actions">
+                    <li><a th:href="@{/adatbazis}" class="button">Adatbázis</a></li>
+                    <li><a th:href="@{/diagram}" class="button">Diagram</a></li>
+                </ul>
             </div>
         </section>
+
     </div>
 
     <th:block th:replace="~{fragments :: footer}"></th:block>
-
 </div>
 <th:block th:replace="~{fragments :: scripts}"></th:block>
 </body>
